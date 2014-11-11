@@ -53,4 +53,23 @@ public class VoteActivity extends ActionBarActivity {
         });
         helper.close();
     }
+
+    public void onDelete(View view1) {
+        for (int i = 0; i < votes.size(); i++) {
+            votes.set(i, 0);
+        }
+        all_votes = 0;
+        view.setAdapter(new VoteAdapter(candidates, votes, this));
+        view.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                VoteAdapter adapter = (VoteAdapter) parent.getAdapter();
+                Integer tmp = votes.get(position);
+                tmp++;
+                all_votes++;
+                votes.set(position, tmp);
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
 }
