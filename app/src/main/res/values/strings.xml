@@ -4,5 +4,7 @@
     <string name="app_name">Colloquium2</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="new_candidate">Enter name of new Candidate</string>
+    <string name="delete_candidate">Enter name of candidate that you want to remove</string>
 
 </resources>

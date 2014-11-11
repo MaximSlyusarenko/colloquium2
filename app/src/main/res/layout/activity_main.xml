@@ -8,9 +8,49 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <TextView
+    <EditText
+        android:id="@+id/newChannelLink"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_candidate" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="Add candidate"
+        android:onClick="onAdd"
+        android:id="@+id/buttonAdd"
+        android:layout_below="@+id/newChannelLink"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start voting"
+        android:onClick="onStart"
+        android:id="@+id/buttonStart"
+        android:layout_below="@+id/newChannelLink"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/deleteCandidate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/delete_candidate"
+        android:layout_below="@+id/buttonStart"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove candidate"
+        android:onClick="onDelete"
+        android:id="@+id/buttonDelete"
+        android:layout_below="@+id/deleteCandidate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

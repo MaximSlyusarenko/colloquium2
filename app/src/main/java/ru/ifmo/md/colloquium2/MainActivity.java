@@ -1,12 +1,27 @@
 package ru.ifmo.md.colloquium2;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    ArrayList<String> candidates = new ArrayList<String>();
+    ArrayList<Integer> votes = new ArrayList<Integer>();
+    SQLiteDatabase db;
+    SQLiteHelper helper = new SQLiteHelper(this);
+    ContentValues cv = new ContentValues();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +50,32 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onAdd(View view) {
+        db = helper.getWritableDatabase();
+        EditText candidate = (EditText) findViewById(R.id.newChannelLink);
+        String name = candidate.getText().toString();
+        candidate.setText("");
+        cv.put("candidate", name);
+        cv.put("votes", 0);
+        long rowID = db.insert("mytable", null, cv);
+        candidates.add(name);
+        votes.add(0);
+        helper.close();
+    }
+
+    public void onStart(View view) {
+        Intent intent = new Intent(MainActivity.this, VoteActivity.class);
+        startActivity(intent);
+    }
+
+    public void onDelete(View view) {
+        db = helper.getWritableDatabase();
+        EditText candidate = (EditText) findViewById(R.id.deleteCandidate);
+        String name = candidate.getText().toString();
+        int clearCount = db.delete("mytable", "candidate LIKE '" + name + "'", null);
+        candidate.setText("");
+        helper.close();
     }
 }
